@@ -6,7 +6,7 @@ export const useSet = <T>(initialValue = new Set<T>()) => {
   const handlers = React.useMemo(() => {
     return Object.assign(value, {
       add: (item: T) => {
-        setValue((oldSet: Set<T>) => {
+        setValue(oldSet => {
           const newSet = new Set(oldSet);
           newSet.add(item);
 
@@ -17,7 +17,7 @@ export const useSet = <T>(initialValue = new Set<T>()) => {
       clear: () => setValue(new Set()),
 
       delete: (item: T) => {
-        setValue((oldSet: Set<T>) => {
+        setValue(oldSet => {
           const newSet = new Set(oldSet);
           newSet.delete(item);
 
