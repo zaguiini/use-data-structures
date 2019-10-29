@@ -38,7 +38,6 @@ function App() {
   );
 }
 ```
-<<<<<<< HEAD
 
 ### Maps
 
@@ -68,8 +67,6 @@ function App() {
 ```
 
 **This is a tough task! Feel free to contribute!**
-=======
->>>>>>> 6480183a80b9a321f600ca983fb94af321ef612a
 
 ## License
 
