@@ -1,6 +1,6 @@
 {
   "name": "use-data-structures",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "license": "MIT",
   "author": "Luis Felipe Zaguini",
   "main": "dist/index.js",
@@ -13,7 +13,8 @@
     "start": "tsdx watch",
     "build": "tsdx build",
     "test": "tsdx test",
-    "lint": "tsdx lint"
+    "lint": "tsdx lint",
+    "prepublish": "yarn build"
   },
   "peerDependencies": {
     "react": "^16.8.0"
