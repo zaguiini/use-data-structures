@@ -46,6 +46,33 @@ function App() {
 }
 ```
 
+#### [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map)
+
+```js
+import { useMap } from 'use-data-structures';
+
+function App() {
+  const map = useMap();
+  // just like useState, you can pass
+  // a default value (e.g. new Map([["key", "value"]]))
+
+  const toggleExistence = () => {
+    if (map.has('key')) {
+      map.delete('key');
+    } else {
+      map.set('key', 'value');
+    }
+  };
+
+  return (
+    <>
+      <p>Set has value 'key': {map.has('key').toString()}</p>
+      <button onClick={toggleExistence}>Toggle 'Key'</button>
+    </>
+  );
+}
+```
+
 ---
 
 ### Sorting algorithms
