@@ -2,7 +2,7 @@
 
 The power of advanced data structures -- now on React!
 
-Powered by [Immutable.JS](https://immutable-js.github.io/), this library adds reactive capacities to data structures, like `Set`s and `Map`s as React state.
+This library adds reactive capacities to data structures, like `Set`s and `Map`s as React state.
 
 ## Installation
 
