@@ -1,12 +1,14 @@
 # useDataStructures
 
 The power of advanced data structures -- now on React!
-
-This lib adds reactive capacities to data structures, like `Set`s and `Map`s to React.
+This library adds reactive capacities to data structures as React state.
 
 ## Installation
 
 `yarn add use-data-structures`
+
+Powered by [TSDX](https://github.com/jaredpalmer/tsdx), TypeScript typing definitions are included by default.
+For the moment we don't have Flow typings but PRs are welcome!
 
 ---
 
