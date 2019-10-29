@@ -12,6 +12,8 @@ This lib adds reactive capacities to data structures, like `Set`s and `Map`s to 
 
 ### Sets
 
+Test it on [CodeSandbox](https://codesandbox.io/s/quizzical-fermi-4jwue)
+
 ```js
 import { useSet } from 'use-data-structures';
 
