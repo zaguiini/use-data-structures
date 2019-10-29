@@ -8,16 +8,16 @@ This lib adds reactive capacities to data structures, like `Set`s and `Map`s to 
 
 `yarn add use-data-structures`
 
-## Usage
+---
 
-### Data structures
+## Data structures
 
 [What is a data structure, anyways?](https://en.wikipedia.org/wiki/Data_structure)
 
 NOTE: it looks obvious, but bear in mind that the values itself are not reactive, only the underlying implementation of the setters.
 It is really important to remember to **not directly modify any value!!!**
 
-#### [Set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set)
+### [Set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set)
 
 Test it on [CodeSandbox](https://codesandbox.io/s/quizzical-fermi-4jwue)
 
@@ -46,7 +46,9 @@ function App() {
 }
 ```
 
-#### [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map)
+### [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map)
+
+Test it on [CodeSandbox](https://codesandbox.io/s/silly-leaf-i19r0)
 
 ```js
 import { useMap } from 'use-data-structures';
@@ -73,15 +75,15 @@ function App() {
 }
 ```
 
----
-
-### Sorting algorithms
+## Sorting algorithms
 
 [What is a sorting algorithm and why should I care?](https://en.wikipedia.org/wiki/Sorting_algorithm)
 
-**NO hook mutates the original array. Instead, all of them creates a shallow copy!**
+**NOTE: NO hook mutates the original array. Instead, all of them creates a shallow copy!**
 
-#### [Selection sort](https://www.geeksforgeeks.org/selection-sort/)
+### [Selection sort](https://www.geeksforgeeks.org/selection-sort/)
+
+Test it on [CodeSandbox](https://codesandbox.io/s/frosty-kalam-87gri)
 
 ```js
 import { useSelectionSort } from 'use-data-structures';
@@ -101,6 +103,8 @@ function App({ unsortedArray }) {
   );
 }
 ```
+
+---
 
 ## Contributing
 
