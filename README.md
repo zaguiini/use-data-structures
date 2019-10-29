@@ -10,7 +10,9 @@ This lib adds reactive capacities to data structures, like `Set`s and `Map`s to 
 
 ## Usage
 
-### Sets
+### Data structures
+
+#### [Set](<https://en.wikipedia.org/wiki/Set_(abstract_data_type)>)
 
 Test it on [CodeSandbox](https://codesandbox.io/s/quizzical-fermi-4jwue)
 
@@ -35,6 +37,31 @@ function App() {
       <p>Set has value 3: {set.has(3).toString()}</p>
       <button onClick={toggleExistence}>Toggle 3</button>
     </>
+  );
+}
+```
+
+---
+
+### Sorting algorithms
+
+#### [Selection sort](https://en.wikipedia.org/wiki/Selection_sort)
+
+```js
+import { useSelectionSort } from 'use-data-structures';
+
+function App({ unsortedArray }) {
+  const sortedArray = useSelectionSort(unsortedArray);
+  // you can pass a custom predicate as the second argument
+  // to change how the array will be sorted
+  // (e.g. (a, b) => a > b) to sort the list in descending order
+
+  return (
+    <ul>
+      {sortedArray.map(value => (
+        <li key={value}>{value}</li>
+      ))}
+    </ul>
   );
 }
 ```
