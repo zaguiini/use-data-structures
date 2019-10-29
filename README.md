@@ -38,7 +38,6 @@ function App() {
   );
 }
 ```
-**This is a tough task! Feel free to contribute!**
 
 ## License
 
