@@ -2884,6 +2884,11 @@ ignore@^4.0.6:
   resolved "https://registry.npmjs.org/ignore/-/ignore-4.0.6.tgz#750e3db5862087b4737ebac8207ffd1ef27b25fc"
   integrity sha512-cyFDKrqc/YdcWFniJhzI42+AzS+gNwmUzOSFcRCQYwySuBBBy/KjuxWLZ/FHEH6Moq1NizMOBWyTcv8O4OZIMg==
 
+immer@^4.0.2:
+  version "4.0.2"
+  resolved "https://registry.npmjs.org/immer/-/immer-4.0.2.tgz#9ff0fcdf88e06f92618a5978ceecb5884e633559"
+  integrity sha512-Q/tm+yKqnKy4RIBmmtISBlhXuSDrB69e9EKTYiIenIKQkXBQir43w+kN/eGiax3wt1J0O1b2fYcNqLSbEcXA7w==
+
 import-fresh@^2.0.0:
   version "2.0.0"
   resolved "https://registry.npmjs.org/import-fresh/-/import-fresh-2.0.0.tgz#d81355c15612d386c61f9ddd3922d4304822a546"
