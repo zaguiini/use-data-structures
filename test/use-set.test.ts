@@ -28,7 +28,7 @@ describe('useSet', () => {
     expect(result.current.size).toBe(0);
   });
 
-  it('delete a value', () => {
+  it('deletes a value', () => {
     const defaultSet = new Set();
     defaultSet.add(3);
 
