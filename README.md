@@ -42,6 +42,7 @@ function App() {
 ## TODO
 
 - Maps/Hashes
+- WeakMaps and WeakSets
 - Stacks
 - Queues
 - Trees/Heaps
