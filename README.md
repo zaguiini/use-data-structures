@@ -37,6 +37,17 @@ function App() {
 }
 ```
 
+## TODO
+
+- Maps/Hashes
+- Stacks
+- Queues
+- Trees/Heaps
+- Graphs
+- Linked lists
+
+**This is a tough task! Feel free to contribute!**
+
 ## License
 
 MIT
