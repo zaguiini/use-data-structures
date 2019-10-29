@@ -20,7 +20,7 @@ import { useSet } from 'use-data-structures';
 function App() {
   const set = useSet();
   // just like useState, you can pass
-  // a default value (e.g. new Set(1, 2, 3))
+  // a default value (e.g. new Set([1, 2, 3]))
 
   const toggleExistence = () => {
     if (set.has(3)) {
