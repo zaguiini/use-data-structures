@@ -12,6 +12,11 @@ This lib adds reactive capacities to data structures, like `Set`s and `Map`s to 
 
 ### Data structures
 
+[What is a data structure, anyways?](https://en.wikipedia.org/wiki/Data_structure)
+
+NOTE: it looks obvious, but bear in mind that the values itself are not reactive, only the underlying implementation of the setters.
+With that in mind, remember to **don't modify the values directly!!!**
+
 #### [Set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set)
 
 Test it on [CodeSandbox](https://codesandbox.io/s/quizzical-fermi-4jwue)
@@ -45,6 +50,10 @@ function App() {
 
 ### Sorting algorithms
 
+[What is a sorting algorithm and why should I care?](https://en.wikipedia.org/wiki/Sorting_algorithm)
+
+**NO hook mutates the original array. Instead, all of them creates a shallow copy!**
+
 #### [Selection sort](https://www.geeksforgeeks.org/selection-sort/)
 
 ```js
@@ -65,6 +74,11 @@ function App({ unsortedArray }) {
   );
 }
 ```
+
+## Contributing
+
+PRs are more than welcome! Feel free to fill as many as you want and collaborate with the community.
+This project embraces TypeScript and good practices, so be sure you are aware of them!
 
 ## License
 
