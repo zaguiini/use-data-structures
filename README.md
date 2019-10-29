@@ -38,18 +38,6 @@ function App() {
   );
 }
 ```
-
-## TODO
-
-- Maps/Hashes
-- WeakMaps and WeakSets
-- Stacks
-- Queues
-- Trees/Heaps
-- Graphs
-- Linked lists
-- Sorting algorithms
-
 **This is a tough task! Feel free to contribute!**
 
 ## License

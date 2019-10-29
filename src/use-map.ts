@@ -5,13 +5,15 @@ export const useMap = <TKey, TValue>(initialState = new Map<TKey, TValue>()) => 
 
   const handlers = useMemo(() => Object.assign(value, {
     set: (key: TKey, value: TValue) => {
-      setValue((oldMap: Map<TKey, TValue>): Map<TKey, TValue> => {
+      setValue((oldMap) => {
         const newMap = new Map(oldMap);
         newMap.set(key, value);
 
         return newMap;
       })
     },
+
+    clear: () => setValue(new Map()),
 
     delete: (key: TKey) => {
       setValue((oldMap) => {
@@ -22,7 +24,6 @@ export const useMap = <TKey, TValue>(initialState = new Map<TKey, TValue>()) => 
       })
     },
 
-    clear: () => setValue(new Map()),
   }), [value])
 
   return handlers;
