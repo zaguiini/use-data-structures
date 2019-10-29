@@ -2,7 +2,7 @@
 
 The power of advanced data structures -- now on React!
 
-This lib adds reactive capacities to data structures, like `Set`s and `Map`s to React.
+Powered by [Immutable.JS](https://immutable-js.github.io/), this library adds reactive capacities to data structures, like `Set`s and `Map`s as React state.
 
 ## Installation
 
@@ -18,15 +18,15 @@ Test it on [CodeSandbox](https://codesandbox.io/s/quizzical-fermi-4jwue)
 import { useSet } from 'use-data-structures';
 
 function App() {
-  const set = useSet();
+  const [set, handlers] = useSet();
   // just like useState, you can pass
   // a default value (e.g. new Set([1, 2, 3]))
 
   const toggleExistence = () => {
     if (set.has(3)) {
-      set.delete(3);
+      handlers.delete(3);
     } else {
-      set.add(3);
+      handlers.add(3);
     }
   };
 

@@ -39,5 +39,8 @@
     "tsdx": "^0.10.5",
     "tslib": "^1.10.0",
     "typescript": "^3.6.4"
+  },
+  "dependencies": {
+    "immutable": "^4.0.0-rc.12"
   }
 }
