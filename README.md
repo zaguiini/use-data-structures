@@ -12,7 +12,7 @@ This lib adds reactive capacities to data structures, like `Set`s and `Map`s to 
 
 ### Data structures
 
-#### [Set](<https://en.wikipedia.org/wiki/Set_(abstract_data_type)>)
+#### [Set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set)
 
 Test it on [CodeSandbox](https://codesandbox.io/s/quizzical-fermi-4jwue)
 
@@ -45,7 +45,7 @@ function App() {
 
 ### Sorting algorithms
 
-#### [Selection sort](https://en.wikipedia.org/wiki/Selection_sort)
+#### [Selection sort](https://www.geeksforgeeks.org/selection-sort/)
 
 ```js
 import { useSelectionSort } from 'use-data-structures';
