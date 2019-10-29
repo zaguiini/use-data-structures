@@ -15,7 +15,7 @@ This lib adds reactive capacities to data structures, like `Set`s and `Map`s to 
 [What is a data structure, anyways?](https://en.wikipedia.org/wiki/Data_structure)
 
 NOTE: it looks obvious, but bear in mind that the values itself are not reactive, only the underlying implementation of the setters.
-With that in mind, remember to **don't modify the values directly!!!**
+It is really important to remember to **not directly modify any value!!!**
 
 #### [Set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set)
 
@@ -66,7 +66,7 @@ function App() {
 
   return (
     <>
-      <p>Set has value 'key': {map.has('key').toString()}</p>
+      <p>Map has value for 'key': {map.has('key').toString()}</p>
       <button onClick={toggleExistence}>Toggle 'Key'</button>
     </>
   );
