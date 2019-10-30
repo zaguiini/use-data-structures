@@ -5,7 +5,7 @@ type Predicate<T> = (a: T, b: T) => boolean;
 
 const defaultPredicate = (a: any, b: any) => a < b;
 
-const selectionSort = <T>(
+export const selectionSort = <T>(
   array: T[],
   predicate: Predicate<T> = defaultPredicate
 ) => {

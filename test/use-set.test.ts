@@ -1,5 +1,5 @@
 import { renderHook, act } from '@testing-library/react-hooks';
-import { useSet } from '../src/use-set';
+import { useSet } from '../src';
 
 describe('useSet', () => {
   it('adds a value', () => {
