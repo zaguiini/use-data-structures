@@ -1,44 +1,44 @@
-import { useState, useMemo } from 'react';
-import produce from 'immer';
+import { useState, useMemo } from 'react'
+import produce from 'immer'
 
 export const useStack = <T>(initialState: T[] = []) => {
-  const [value, setValue] = useState(initialState);
+  const [value, setValue] = useState(initialState)
 
   const handlers = useMemo(
     () => ({
       isEmpty: () => {
-        return value.length === 0;
+        return value.length === 0
       },
 
       peek: () => {
-        let peeked = value[value.length - 1];
-        return peeked;
+        let peeked = value[value.length - 1]
+        return peeked
       },
 
       pop: () => {
-        if (value.length === 0) return;
+        if (value.length === 0) return
 
-        let popped;
-        setValue(oldStack =>
+        let popped
+        setValue((oldStack) =>
           produce(oldStack, (draft: T[]) => {
-            popped = draft.pop();
+            popped = draft.pop()
           })
-        );
-        return popped;
+        )
+        return popped
       },
 
       push: (item: T) => {
-        setValue(oldStack =>
+        setValue((oldStack) =>
           produce(oldStack, (draft: T[]) => {
-            draft.push(item);
+            draft.push(item)
           })
-        );
+        )
       },
 
       size: value.length,
     }),
     [value]
-  );
+  )
 
-  return handlers;
-};
+  return handlers
+}
