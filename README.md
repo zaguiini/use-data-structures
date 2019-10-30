@@ -85,7 +85,9 @@ function App() {
 
 ### [Selection sort](https://www.geeksforgeeks.org/selection-sort/)
 
-Test it on [CodeSandbox](https://codesandbox.io/s/frosty-kalam-87gri)
+### [Bubble sort](https://www.geeksforgeeks.org/bubble-sort/)
+
+Sample usage:
 
 ```js
 import { useSelectionSort } from 'use-data-structures';
@@ -105,6 +107,8 @@ function App({ unsortedArray }) {
   );
 }
 ```
+
+Every sorting algorithm goes the same way: `useAlgorithm` with the unsorted array as the first argument and an optional predicate function.
 
 ---
 
