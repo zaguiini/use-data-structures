@@ -85,8 +85,8 @@ function App() {
 
 ### Supported algorithms
 
-- [Selection sort](https://www.geeksforgeeks.org/selection-sort/)
-- [Bubble sort](https://www.geeksforgeeks.org/bubble-sort/)
+- [Selection sort](https://www.geeksforgeeks.org/selection-sort/) (`useSelectionSort`)
+- [Bubble sort](https://www.geeksforgeeks.org/bubble-sort/) (`useBubbleSort`)
 
 ### Sample usage:
 
