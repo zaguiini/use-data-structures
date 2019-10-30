@@ -10,7 +10,15 @@ const Node = <T>(data: T, next: Node<T> | null = null) => ({
   next,
 });
 
-export const useLinkedList = <T>(head?: Node<T>) => {
+interface Handlers<T> {
+  add: (data: T) => void;
+  addAt: (data: T, index: number) => void;
+  removeAt: (index: number) => void;
+}
+
+export const useLinkedList = <T>(
+  head?: Node<T>
+): [Node<T> | null, Handlers<T>] => {
   const [list, setList] = React.useState(head || null);
 
   const handlers = React.useMemo(() => {
@@ -51,14 +59,12 @@ export const useLinkedList = <T>(head?: Node<T>) => {
         }
 
         let head = Node(list.data, list.next);
-        let current = head,
-          previous = head,
-          counter = 0;
+        let current = head;
+        let previous = head;
 
-        while (counter < index && current.next) {
+        for (let counter = 0; counter < index && current.next; counter++) {
           previous = current;
           current = current.next;
-          counter++;
         }
 
         previous.next = current.next;
