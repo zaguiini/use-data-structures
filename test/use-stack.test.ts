@@ -22,7 +22,7 @@ describe('useStack', () => {
     });
 
     expect(result.current.isEmpty()).toBeFalsy();
-    expect(result.current.length).toBe(1);
+    expect(result.current.size).toBe(1);
   });
 
   it('should pop a value', () => {
