@@ -13,7 +13,7 @@
     "start": "tsdx watch",
     "build": "tsdx build",
     "test": "tsdx test",
-    "lint": "tsdx lint",
+    "lint": "tsdx lint './src/**/*.{ts,tsx}' --fix",
     "prepublish": "yarn build"
   },
   "peerDependencies": {
@@ -21,14 +21,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "tsdx lint"
+      "pre-commit": "yarn lint"
     }
-  },
-  "prettier": {
-    "printWidth": 80,
-    "semi": true,
-    "singleQuote": true,
-    "trailingComma": "es5"
   },
   "devDependencies": {
     "@testing-library/react-hooks": "^3.1.1",
