@@ -15,7 +15,7 @@ export const useStack = <T>(initialState: T[] = []) => {
           return peeked;
         },
 
-        pop: (): void | string => {
+        pop: () => {
           if (value.length === 0) return;
 
           let popped;
