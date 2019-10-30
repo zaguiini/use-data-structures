@@ -83,11 +83,12 @@ function App() {
 
 **NOTE: NO hook mutates the original array. Instead, all of them creates a shallow copy!**
 
-### [Selection sort](https://www.geeksforgeeks.org/selection-sort/)
+### Supported algorithms
 
-### [Bubble sort](https://www.geeksforgeeks.org/bubble-sort/)
+- [Selection sort](https://www.geeksforgeeks.org/selection-sort/)
+- [Bubble sort](https://www.geeksforgeeks.org/bubble-sort/)
 
-Sample usage:
+### Sample usage:
 
 ```js
 import { useSelectionSort } from 'use-data-structures';
