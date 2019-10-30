@@ -83,9 +83,12 @@ function App() {
 
 **NOTE: NO hook mutates the original array. Instead, all of them creates a shallow copy!**
 
-### [Selection sort](https://www.geeksforgeeks.org/selection-sort/)
+### Supported algorithms
 
-Test it on [CodeSandbox](https://codesandbox.io/s/frosty-kalam-87gri)
+- [Selection sort](https://www.geeksforgeeks.org/selection-sort/) (`useSelectionSort`)
+- [Bubble sort](https://www.geeksforgeeks.org/bubble-sort/) (`useBubbleSort`)
+
+### Sample usage:
 
 ```js
 import { useSelectionSort } from 'use-data-structures';
@@ -105,6 +108,8 @@ function App({ unsortedArray }) {
   );
 }
 ```
+
+Every sorting algorithm goes the same way: `useAlgorithm` with the unsorted array as the first argument and an optional predicate function.
 
 ---
 
