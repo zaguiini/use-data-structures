@@ -57,4 +57,10 @@ describe('useStack', () => {
 
     expect(result.current.isEmpty()).toBeTruthy();
   });
+
+  it('should return correct size', () => {
+    const { result } = renderHook(() => useStack([1, 2, 3]));
+
+    expect(result.current.size).toBe(3);
+  });
 });
