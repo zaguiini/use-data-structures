@@ -1,0 +1,80 @@
+---
+name: useQueue
+route: /queue
+---
+
+import { Playground } from "docz"
+import { useQueue } from "../src"
+import { useRef } from "react" 
+
+# useQueue
+
+Just like `useState`, you can pass a default value (e.g. `useQueue([1, 2, 3])`)
+
+```js
+import { useQueue } from "use-data-structures"
+
+function App() {
+  const input = useRef();
+  const queue = useQueue();
+
+  const addQueue = () => {
+    queue.enqueue(input.current.value);
+    input.current.value = null;
+  }
+
+  const removeQueue = () => {
+    queue.dequeue();
+  }
+
+  const frontQueue = () => {
+    alert(queue.front())
+  }
+
+  return (
+    <div>
+      <p>Queue: {queue.values().join(', ')}</p>
+      <p>Queue size: {queue.size}</p>
+      <div>
+        <input ref={input} placeholder="value to queue" />{" "}
+        <button onClick={addQueue}>Queue</button>{" "}
+        <button onClick={removeQueue}>Dequeue</button>{" "}
+        <button onClick={frontQueue}>Front</button>
+      </div>
+    </div>
+  )
+}
+```
+
+<Playground>
+  {() => {
+    const input = useRef();
+    const queue = useQueue();
+
+    const addQueue = () => {
+      queue.enqueue(input.current.value);
+      input.current.value = null;
+    }
+
+    const removeQueue = () => {
+      queue.dequeue();
+    }
+
+    const frontQueue = () => {
+      alert(queue.front())
+    }
+
+    return (
+      <div>
+        <p>Queue: {queue.values().join(', ')}</p>
+        <p>Queue size: {queue.size}</p>
+        <div>
+          <input ref={input} placeholder="value to queue" />{" "}
+          <button onClick={addQueue}>Queue</button>{" "}
+          <button onClick={removeQueue}>Dequeue</button>{" "}
+          <button onClick={frontQueue}>Front</button>
+        </div>
+      </div>
+    )
+  }}
+</Playground>
