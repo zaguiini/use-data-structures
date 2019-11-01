@@ -8,12 +8,12 @@ import { useSet } from "../src";
 
 # useSet
 
+Just like `useState`, you can pass a default value (e.g. `new Set([1, 2, 3])`)
+
 ```js
 function App() {
   set = useSet();
-  // just like useState, you can pass
-  // a default value (e.g. new Set([1, 2, 3]))
-
+ 
   const toggleExistence = () => {
     if (set.has(3)) {
       set.delete(3)

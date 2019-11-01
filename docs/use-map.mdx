@@ -8,11 +8,11 @@ import { useMap } from "../src"
 
 # useMap
 
+Just like `useState`, you can pass a default value (e.g. `new Map([['key', 'value']])`)
+
 ```js
 function App() {
   const map = useMap();
-  // just like useState, you can pass
-  // a default value (e.g. new Map([["key", "value"]]))
 
   const toggleExistence = () => {
     if (map.has('key')) {
