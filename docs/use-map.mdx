@@ -1,0 +1,55 @@
+---
+name: useMap
+route: /map
+---
+
+import { Playground, Props } from "docz"
+import { useMap } from "../src"
+
+# useMap
+
+```js
+function App() {
+  const map = useMap();
+  // just like useState, you can pass
+  // a default value (e.g. new Map([["key", "value"]]))
+
+  const toggleExistence = () => {
+    if (map.has('key')) {
+      map.delete('key');
+    } else {
+      map.set('key', 'value');
+    }
+  };
+
+  return (
+    <>
+      <p>Map has value for 'key': {map.has('key').toString()}</p>
+      <button onClick={toggleExistence}>Toggle 'Key'</button>
+    </>
+  );
+}
+```
+
+### Example
+
+<Playground>
+  {() => {
+    const map = useMap();
+
+    const toggleExistence = () => {
+      if (map.has('key')) {
+        map.delete('key');
+      } else {
+        map.set('key', 'value');
+      }
+    };
+
+    return (
+      <>
+        <p>Map has value for 'key': {map.has('key').toString()}</p>
+        <button onClick={toggleExistence}>Toggle 'Key'</button>
+      </>
+    ); 
+  }}
+</Playground>

@@ -1,0 +1,55 @@
+---
+name: useSet
+route: /set
+---
+
+import { Playground, Props } from "docz"
+import { useSet } from "../src";
+
+# useSet
+
+```js
+function App() {
+  set = useSet();
+  // just like useState, you can pass
+  // a default value (e.g. new Set([1, 2, 3]))
+
+  const toggleExistence = () => {
+    if (set.has(3)) {
+      set.delete(3)
+    } else {
+      set.add(3)
+    }
+
+    return (
+      <>
+        <p>Set has value 3: {set.has(3).toString()}</p>
+        <button onClick={toggleExistence}>Toggle 3</button>
+      </>
+    )
+  }
+}
+```
+
+### Example
+
+<Playground>
+  {() => {
+    const set = useSet();
+
+    const toggleExistence = () => {
+      if (set.has(3)) {
+        set.delete(3)
+      } else {
+        set.add(3)
+      }
+    }
+
+    return (
+      <>
+        <p>Set has value 3: {set.has(3).toString()}</p>
+        <button onClick={toggleExistence}>Toggle 3</button>
+      </>
+    )
+  }}
+</Playground>
