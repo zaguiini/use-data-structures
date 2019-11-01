@@ -27,7 +27,6 @@ export const useQueue = <T>(initialValue: T[] = []) => {
         )
       },
 
-
       isEmpty: () => {
         return value.length === 0
       },
