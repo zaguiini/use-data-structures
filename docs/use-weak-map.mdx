@@ -3,18 +3,18 @@ name: useWeakMap
 route: /weak-map
 ---
 
-import { Playground } from "docz"
-import { useWeakMap } from "../src"
+import { Playground } from 'docz'
+import { useWeakMap } from '../src'
 
 # useWeakMap
 
 Just like `useState`, you can passa default value (e.g. `new WeakMap([[key, value]])`)
 
 ```js
-import { useWeakMap } from "use-data-structures"
+import { useWeakMap } from 'use-data-structures'
 
 function App() {
-  const weakMap = useWeakMap();
+  const weakMap = useWeakMap()
   const key = {}
 
   const toggleExistence = () => {
@@ -27,9 +27,7 @@ function App() {
     }
   }
 
-  return (
-    <button onClick={toggleExistence}>Toggle 3</button>
-  )
+  return <button onClick={toggleExistence}>Toggle 3</button>
 }
 ```
 
@@ -51,5 +49,7 @@ function App() {
     return (
       <button onClick={toggleExistence}>Toggle existence</button>
     )
-  }}
+
+}}
+
 </Playground>
