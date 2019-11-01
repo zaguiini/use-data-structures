@@ -1,12 +1,23 @@
 ---
-name: Sorting
-route: /sorting
+name: Sorting algorithms
+route: /sorting-algorithms
 ---
 
 import { Playground, Props } from "docz"
 import { useBubbleSort } from "../src"
 
-# useBubbleSort
+# Sorting algorithms
+
+All the sorting algorithms follow the same pattern. Here are the algorithms we implemented:
+
+- `useBubbleSort`
+- `useSelectionSort`
+
+You can pass a custom predicate as the second argument to the hook to change how the array will be sorted.
+
+Example: `(a, b) => a > b` to sort the list in descending order.
+
+We are **NOT** changing your array, we are creating a shallow copy of it.
 
 ```js
 import { useBubbleSort } from "use-data-structures"
@@ -21,16 +32,16 @@ function App() {
   return (
     <div>
       <h2>Unsorted array</h2>
-      <p>{ unsortedArray.join(",").toString() }</p>
+      <p>{ unsortedArray.join(", ").toString() }</p>
 
       <h2>Sorted array</h2>
-      <p>{ sortedArray.join(",").toString() }</p>
+      <p>{ sortedArray.join(", ").toString() }</p>
     </div>
   );
 }
 ```
 
-## Display
+### Example
 
 <Playground>
   {() => {
@@ -40,10 +51,10 @@ function App() {
     return (
       <div>
         <h2>Unsorted array</h2>
-        <p>{ unsortedArray.join(",").toString()}</p>
+        <p>{ unsortedArray.join(", ").toString()}</p>
 
         <h2>Sorted array</h2>
-        <p>{ sortedArray.join(",").toString()}</p>
+        <p>{ sortedArray.join(", ").toString()}</p>
       </div>
     );
   }}

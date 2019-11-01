@@ -13,8 +13,10 @@
     "start": "tsdx watch",
     "build": "tsdx build",
     "test": "tsdx test",
-    "lint": "tsdx lint './src/**/*.{ts,tsx}' --fix",
-    "prepublish": "yarn build"
+    "lint": "tsdx lint ./src/**/*.{ts,tsx} --fix",
+    "prepublish": "yarn build",
+    "docz:dev": "docz dev",
+    "docz:build": "docz build"
   },
   "peerDependencies": {
     "react": "^16.8.0"
