@@ -3,8 +3,8 @@ name: useMap
 route: /map
 ---
 
-import { Playground, Props } from "docz"
-import { useMap } from "../src"
+import { Playground, Props } from 'docz'
+import { useMap } from '../src'
 
 # useMap
 
@@ -12,22 +12,22 @@ Just like `useState`, you can pass a default value (e.g. `new Map([['key', 'valu
 
 ```js
 function App() {
-  const map = useMap();
+  const map = useMap()
 
   const toggleExistence = () => {
     if (map.has('key')) {
-      map.delete('key');
+      map.delete('key')
     } else {
-      map.set('key', 'value');
+      map.set('key', 'value')
     }
-  };
+  }
 
   return (
     <>
       <p>Map has value for 'key': {map.has('key').toString()}</p>
       <button onClick={toggleExistence}>Toggle 'Key'</button>
     </>
-  );
+  )
 }
 ```
 
@@ -50,6 +50,8 @@ function App() {
         <p>Map has value for 'key': {map.has('key').toString()}</p>
         <button onClick={toggleExistence}>Toggle 'Key'</button>
       </>
-    ); 
-  }}
+    );
+
+}}
+
 </Playground>
