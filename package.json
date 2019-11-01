@@ -13,10 +13,11 @@
     "start": "tsdx watch",
     "build": "tsdx build",
     "test": "tsdx test",
-    "lint": "tsdx lint ./src/**/*.{ts,tsx} --fix",
+    "lint": "tsdx lint './src/**/*.{ts,tsx}' --fix",
     "prepublish": "yarn build",
     "docz:dev": "docz dev",
-    "docz:build": "docz build"
+    "docz:build": "docz build",
+    "docz:publish": "npx surge .docz/dist use-data-structures.surge.sh"
   },
   "peerDependencies": {
     "react": "^16.8.0"
@@ -40,6 +41,6 @@
     "typescript": "^3.6.4"
   },
   "dependencies": {
-    "immer": "^4.0.2"
+    "immer": "^5.0.0"
   }
 }
