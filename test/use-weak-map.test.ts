@@ -1,7 +1,7 @@
-import { renderHook, act } from "@testing-library/react-hooks"
-import { useWeakMap } from "../src"
+import { renderHook, act } from '@testing-library/react-hooks'
+import { useWeakMap } from '../src'
 
-describe("useWeakMap", () => {
+describe('useWeakMap', () => {
   it('should set a correct value', () => {
     let key = {};
     const { result } = renderHook(() => useWeakMap());
@@ -13,7 +13,7 @@ describe("useWeakMap", () => {
     expect(result.current.has(key)).toBeTruthy()
   })
 
-  it("should get a value", () => {
+  it('should get a value', () => {
     let key = {}
     const { result } = renderHook(() => useWeakMap(new WeakMap([[key, 'test']])));
 
@@ -22,7 +22,7 @@ describe("useWeakMap", () => {
     expect(value).toBe('test')
   })
 
-  it("should try to get a value", () => {
+  it('should try to get a value', () => {
     let key = {}
     const { result } = renderHook(() => useWeakMap(new WeakMap()));
 

@@ -1,0 +1,55 @@
+---
+name: useWeakMap
+route: /weak-map
+---
+
+import { Playground } from "docz"
+import { useWeakMap } from "../src"
+
+# useWeakMap
+
+Just like `useState`, you can passa default value (e.g. `new WeakMap([[key, value]])`)
+
+```js
+import { useWeakMap } from "use-data-structures"
+
+function App() {
+  const weakMap = useWeakMap();
+  const key = {}
+
+  const toggleExistence = () => {
+    if (weakMap.has(key)) {
+      weakMap.delete(key)
+      alert(weakMap.get(key))
+    } else {
+      weakMap.set(key, 'Added value')
+      alert(weakMap.get(key))
+    }
+  }
+
+  return (
+    <button onClick={toggleExistence}>Toggle 3</button>
+  )
+}
+```
+
+<Playground>
+  {() => {
+    const weakMap = useWeakMap();
+    const key = {}
+
+    const toggleExistence = () => {
+      if (weakMap.has(key)) {
+        weakMap.delete(key)
+        alert(weakMap.get(key))
+      } else {
+        weakMap.set(key, 'Added value')
+        alert(weakMap.get(key))
+      }
+    }
+
+    return (
+      <button onClick={toggleExistence}>Toggle existence</button>
+    )
+  }}
+</Playground>
