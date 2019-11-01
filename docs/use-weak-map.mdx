@@ -20,11 +20,10 @@ function App() {
   const toggleExistence = () => {
     if (weakMap.has(key)) {
       weakMap.delete(key)
-      alert(weakMap.get(key))
     } else {
       weakMap.set(key, 'Added value')
-      alert(weakMap.get(key))
     }
+    alert(weakMap.get(key))
   }
 
   return <button onClick={toggleExistence}>Toggle 3</button>
@@ -39,11 +38,10 @@ function App() {
     const toggleExistence = () => {
       if (weakMap.has(key)) {
         weakMap.delete(key)
-        alert(weakMap.get(key))
       } else {
         weakMap.set(key, 'Added value')
-        alert(weakMap.get(key))
       }
+      alert(weakMap.get(key))
     }
 
     return (
