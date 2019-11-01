@@ -27,19 +27,18 @@ function App() {
     queue.dequeue();
   }
 
-  const frontQueue = () => {
-    alert(queue.front())
+  const peekQueue = () => {
+    alert(queue.peek())
   }
 
   return (
     <div>
-      <p>Queue: {queue.values().join(', ')}</p>
       <p>Queue size: {queue.size}</p>
       <div>
         <input ref={input} placeholder="value to queue" />{" "}
         <button onClick={addQueue}>Queue</button>{" "}
         <button onClick={removeQueue}>Dequeue</button>{" "}
-        <button onClick={frontQueue}>Front</button>
+        <button onClick={peekQueue}>Peek</button>
       </div>
     </div>
   )
@@ -60,19 +59,18 @@ function App() {
       queue.dequeue();
     }
 
-    const frontQueue = () => {
-      alert(queue.front())
+    const peekQueue = () => {
+      alert(queue.peek())
     }
 
     return (
       <div>
-        <p>Queue: {queue.values().join(', ')}</p>
         <p>Queue size: {queue.size}</p>
         <div>
           <input ref={input} placeholder="value to queue" />{" "}
           <button onClick={addQueue}>Queue</button>{" "}
           <button onClick={removeQueue}>Dequeue</button>{" "}
-          <button onClick={frontQueue}>Front</button>
+          <button onClick={peekQueue}>Peek</button>
         </div>
       </div>
     )

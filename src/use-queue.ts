@@ -12,7 +12,7 @@ export const useQueue = <T>(initialValue: T[] = []) => {
         let shifted
         setValue((oldQueue) =>
           produce(oldQueue, (draft: T[]) => {
-            shifted = draft.shift()
+            shifted = draft.pop()
           })
         )
 
@@ -22,26 +22,24 @@ export const useQueue = <T>(initialValue: T[] = []) => {
       enqueue: (item: T) => {
         setValue((oldQueue) =>
           produce(oldQueue, (draft: T[]) => {
-            draft.push(item)
+            draft.unshift(item)
           })
         )
       },
 
-      front: () => {
-        if (value.length === 0) return
-
-        return value[0]
-      },
 
       isEmpty: () => {
         return value.length === 0
       },
 
-      size: value.length,
+      peek: () => {
+        let length = value.length
+        if (length === 0) return
 
-      values: () => {
-        return value
+        return value[length - 1]
       },
+
+      size: value.length,
     }),
     [value]
   )
