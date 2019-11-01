@@ -38,10 +38,6 @@ export const useQueue = <T>(initialValue: T[] = []) => {
       },
 
       size: value.length,
-
-      values: () => {
-        return value
-      },
     }),
     [value]
   )

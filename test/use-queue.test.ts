@@ -64,12 +64,4 @@ describe('useQueue', () => {
     let front = result.current.front();
     expect(front).toBeUndefined();
   })
-
-  it('should return all values in queue', () => {
-    const { result } = renderHook(() => useQueue([1, 2, 3]));
-
-    let values = result.current.values();
-
-    expect(values).toEqual(expect.arrayContaining([1, 2, 3]))
-  })
 })
