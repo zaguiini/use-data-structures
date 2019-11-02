@@ -1,4 +1,4 @@
-# useDataStructures 🤓
+# useDataStructures &middot; [![Coverage Status](https://coveralls.io/repos/github/zaguiini/use-data-structures/badge.svg?branch=master)](https://coveralls.io/github/zaguiini/use-data-structures?branch=master)
 
 The power of advanced data structures -- now on React!
 This library adds reactive capacities to data structures as React state.

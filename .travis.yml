@@ -1,0 +1,38 @@
+language: node_js
+
+node_js:
+  - node
+
+cache:
+  yarn: true
+  directories:
+    - node_modules
+
+install:
+  - yarn
+
+script:
+  - yarn lint
+  - yarn test:coverage
+
+before_deploy:
+  - git remote remove origin
+  - git remote add origin https://${GH_TOKEN}@github.com/zaguiini/use-data-structures.git
+  - git fetch && git checkout master
+  - git config user.name "Travis CI"
+  - git config user.email "travis@travis-ci.org"
+
+deploy:
+  provider: script
+  script: "npm config set '//registry.npmjs.org/:_authToken' '${API_TOKEN}' && yarn publish --new-version ${TRAVIS_TAG}"
+  on:
+    tags: true
+    branch: master
+
+after_deploy:
+  - git commit --amend -m "v$TRAVIS_TAG [skip ci]"
+  - git push origin master
+
+after_success:
+  - yarn docz:build
+  - yarn docz:publish
