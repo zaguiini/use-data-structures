@@ -1,7 +1,15 @@
 module.exports = {
   title: 'useDataStructures',
   typescript: true,
-  menu: ['What is this?', 'useMap', 'useQueue', 'useSet', 'useWeakMap', 'Sorting algorithms'],
+  menu: [
+    'What is this?',
+    'useMap',
+    'useQueue',
+    'useSet',
+    'useStack',
+    'useWeakMap',
+    'Sorting algorithms',
+  ],
   themeConfig: {
     mode: 'dark',
     colors: {

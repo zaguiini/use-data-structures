@@ -1,0 +1,80 @@
+---
+name: useStack
+route: /stack
+---
+
+import { Playground } from 'docz'
+import { useStack } from '../src'
+import { useRef } from 'react'
+
+# useStack
+
+Just like `useState`, you can pass a default value (e.g. `useStack([1, 2, 3])`)
+
+```js
+import { useStack } from 'use-data-structures'
+
+function App() {
+  const input = useRef()
+  const stack = useStack()
+
+  const addItem = () => {
+    stack.push(input.current.value)
+    input.current.value = null
+  }
+
+  const removeItem = () => {
+    stack.pop()
+  }
+
+  const peekStack = () => {
+    alert(stack.peek())
+  }
+
+  return (
+    <div>
+      <p>Stack size: {stack.size}</p>
+      <div>
+        <input ref={input} placeholder="value to stack" />{' '}
+        <button onClick={addItem}>Push</button>{' '}
+        <button onClick={removeItem}>Pop</button>{' '}
+        <button onClick={peekStack}>Peek</button>
+      </div>
+    </div>
+  )
+}
+```
+
+<Playground>
+  {() => {
+    const input = useRef()
+    const stack = useStack()
+
+    const addItem = () => {
+      stack.push(input.current.value)
+      input.current.value = null
+    }
+
+    const removeItem = () => {
+      stack.pop()
+    }
+
+    const peekStack = () => {
+      alert(stack.peek())
+    }
+
+    return (
+      <div>
+        <p>Stack size: {stack.size}</p>
+        <div>
+          <input ref={input} placeholder="value to stack" />{' '}
+          <button onClick={addItem}>Push</button>{' '}
+          <button onClick={removeItem}>Pop</button>{' '}
+          <button onClick={peekStack}>Peek</button>
+        </div>
+      </div>
+    )
+
+}}
+
+</Playground>
