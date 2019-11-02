@@ -25,6 +25,7 @@ before_deploy:
 deploy:
   provider: script
   script: "npm config set '//registry.npmjs.org/:_authToken' '${API_TOKEN}' && yarn publish --new-version ${TRAVIS_TAG}"
+  skip_cleanup: true
   on:
     tags: true
     branch: master
