@@ -32,7 +32,5 @@ deploy:
 after_deploy:
   - git commit --amend -m "v$TRAVIS_TAG [skip ci]"
   - git push origin master
-
-after_success:
   - yarn docz:build
   - yarn docz:publish
