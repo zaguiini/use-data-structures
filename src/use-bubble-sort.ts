@@ -1,38 +1,38 @@
-import React from 'react';
-import produce from 'immer';
+import React from 'react'
+import produce from 'immer'
 
-type Predicate<T> = (a: T, b: T) => boolean;
+type Predicate<T> = (a: T, b: T) => boolean
 
-const defaultPredicate = (a: any, b: any) => a > b;
+const defaultPredicate = (a: any, b: any) => a > b
 
 export const bubbleSort = <T>(
   array: T[],
   predicate: Predicate<T> = defaultPredicate
 ) => {
-  let swapped: boolean;
+  let swapped: boolean
 
   do {
-    swapped = false;
+    swapped = false
 
     for (let arrayIndex = 0; arrayIndex < array.length - 1; arrayIndex++) {
       if (predicate(array[arrayIndex], array[arrayIndex + 1])) {
-        const tempElement = array[arrayIndex];
-        array[arrayIndex] = array[arrayIndex + 1];
-        array[arrayIndex + 1] = tempElement;
+        const tempElement = array[arrayIndex]
+        array[arrayIndex] = array[arrayIndex + 1]
+        array[arrayIndex + 1] = tempElement
 
-        swapped = true;
+        swapped = true
       }
     }
-  } while (swapped);
+  } while (swapped)
 
-  return array;
-};
+  return array
+}
 
 export const useBubbleSort = <T>(array: T[], predicate?: Predicate<T>) => {
   const sortedArray = React.useMemo(
-    () => produce(array, draft => bubbleSort(draft as T[], predicate)),
+    () => produce(array, (draft) => bubbleSort(draft as T[], predicate)),
     [array, predicate]
-  );
+  )
 
-  return sortedArray;
-};
+  return sortedArray
+}
