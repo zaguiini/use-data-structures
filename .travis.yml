@@ -9,11 +9,12 @@ cache:
     - node_modules
 
 install:
-  - yarn
+  - yarn --ignore-scripts
 
 script:
   - yarn lint
   - yarn test:coverage
+  - yarn build
 
 before_deploy:
   - git remote remove origin

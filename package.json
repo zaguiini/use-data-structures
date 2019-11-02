@@ -15,7 +15,6 @@
     "test": "tsdx test",
     "test:coverage": "yarn test --coverage && cat ./coverage/lcov.info | coveralls",
     "lint": "tsdx lint './src/**/*.{ts,tsx}'",
-    "prepublish": "yarn build",
     "docz:dev": "docz dev",
     "docz:build": "docz build",
     "docz:publish": "npx surge .docz/dist use-data-structures.surge.sh"
