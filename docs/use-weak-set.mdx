@@ -1,0 +1,53 @@
+---
+name: useWeakSet
+route: /weak-set
+---
+
+import { Playground } from 'docz'
+import { useWeakSet } from '../src'
+
+# useWeakSet
+
+Just like `useState`, you can pass a default value (e.g. `useWeakSet(new WeakSet([{}]))`)
+
+```js
+import { useWeakSet } from 'use-data-structures'
+
+function App() {
+  const weakSet = useWeakSet()
+  const value = {}
+
+  const toggleWeakSet = () => {
+    if (weakSet.has(value)) {
+      weakSet.delete(value)
+    } else {
+      weakSet.add(value)
+    }
+
+    alert(weakSet.has(value).toString())
+  }
+
+  return <button onClick={toggleWeakSet}>Toggle</button>
+}
+```
+
+<Playground>
+  {() => {
+    const weakSet = useWeakSet();
+    const value = {}
+
+    const toggleWeakSet = () => {
+      if (weakSet.has(value)) {
+        weakSet.delete(value)
+      } else {
+        weakSet.add(value)
+      }
+
+      alert(weakSet.has(value).toString())
+    }
+
+    return <button onClick={toggleWeakSet}>Toggle</button>
+
+}}
+
+</Playground>
