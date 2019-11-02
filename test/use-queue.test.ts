@@ -1,21 +1,21 @@
-import { renderHook, act } from '@testing-library/react-hooks';
-import { useQueue } from '../src';
+import { renderHook, act } from '@testing-library/react-hooks'
+import { useQueue } from '../src'
 
 describe('useQueue', () => {
   it('should return the correct size', () => {
-    const { result } = renderHook(() => useQueue([1, 2, 3]));
+    const { result } = renderHook(() => useQueue([1, 2, 3]))
 
-    expect(result.current.size).toBe(3);
+    expect(result.current.size).toBe(3)
   })
 
   it('should check empty queue', () => {
-    const { result } = renderHook(() => useQueue());
+    const { result } = renderHook(() => useQueue())
 
-    expect(result.current.isEmpty()).toBeTruthy();
+    expect(result.current.isEmpty()).toBeTruthy()
   })
 
-  it("should enqueue a value", () => {
-    const { result } = renderHook(() => useQueue());
+  it('should enqueue a value', () => {
+    const { result } = renderHook(() => useQueue())
 
     act(() => {
       result.current.enqueue(1)
@@ -24,44 +24,44 @@ describe('useQueue', () => {
     expect(result.current.size).toBe(1)
   })
 
-  it("should dequeue a value", () => {
+  it('should dequeue a value', () => {
     const { result } = renderHook(() => useQueue([6, 5]))
 
     expect(result.current.size).toBe(2)
 
-    let shifted;
+    let shifted
     act(() => {
-      shifted = result.current.dequeue();
+      shifted = result.current.dequeue()
     })
 
     expect(shifted).toBe(5)
-    expect(result.current.size).toBe(1);
+    expect(result.current.size).toBe(1)
   })
 
-  it("should try to dequeue a value", () => {
+  it('should try to dequeue a value', () => {
     const { result } = renderHook(() => useQueue())
 
-    let shifted;
+    let shifted
     act(() => {
-      shifted = result.current.dequeue();
+      shifted = result.current.dequeue()
     })
 
-    expect(shifted).toBeUndefined();
+    expect(shifted).toBeUndefined()
   })
 
-  it("should check the front value", () => {
-    const { result } = renderHook(() => useQueue([5, 6]));
+  it('should check the front value', () => {
+    const { result } = renderHook(() => useQueue([5, 6]))
 
-    let front = result.current.peek();
+    let front = result.current.peek()
 
-    expect(front).toBe(6);
-    expect(result.current.size).toBe(2);
+    expect(front).toBe(6)
+    expect(result.current.size).toBe(2)
   })
 
   it('should try to check the front value', () => {
     const { result } = renderHook(() => useQueue())
 
-    let front = result.current.peek();
-    expect(front).toBeUndefined();
+    let front = result.current.peek()
+    expect(front).toBeUndefined()
   })
 })
