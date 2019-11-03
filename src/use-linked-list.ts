@@ -1,11 +1,11 @@
 import React from 'react'
 
-interface Node<T> {
+export interface Node<T> {
   data: T
   next: Node<T> | null
 }
 
-const Node = <T>(data: T, next: Node<T> | null = null) => ({
+const NodeClass = <T>(data: T, next: Node<T> | null = null) => ({
   data,
   next,
 })
@@ -13,13 +13,18 @@ const Node = <T>(data: T, next: Node<T> | null = null) => ({
 interface Handlers<T> {
   add: (data: T) => void
   addAt: (data: T, index: number) => void
+  clear: () => void
+  get: (value: T) => Node<T> | null
+  prepend: (data: T) => void
+  remove: (value: T) => void
   removeAt: (index: number) => void
+  size: () => number
 }
 
 export const useLinkedList = <T>(
-  head?: Node<T>
+  initialHead?: Node<T>
 ): [Node<T> | null, Handlers<T>] => {
-  const [list, setList] = React.useState(head || null)
+  const [head, setList] = React.useState(initialHead || null)
 
   const handlers = React.useMemo(() => {
     const addAt = (data: T, index: number) => {
@@ -27,11 +32,11 @@ export const useLinkedList = <T>(
         let head
 
         if (index === 0) {
-          return Node(data, list)
+          return NodeClass(data, list)
         } else if (list) {
-          head = Node(list.data, list.next)
+          head = NodeClass(list.data, list.next)
         } else {
-          head = Node(data)
+          head = NodeClass(data)
         }
 
         let current = head
@@ -40,13 +45,13 @@ export const useLinkedList = <T>(
           current = current.next
         }
 
-        current.next = Node(data)
+        current.next = NodeClass(data)
 
         return head
       })
     }
 
-    const add = (data: T) => addAt(data, 0)
+    const prepend = (data: T) => addAt(data, 0)
 
     const removeAt = (index: number) => {
       setList((list) => {
@@ -55,19 +60,83 @@ export const useLinkedList = <T>(
         }
 
         if (index === 0) {
-          return list.next
+          return list.next ? list.next : null
         }
 
-        let head = Node(list.data, list.next)
+        let head = NodeClass(list.data, list.next)
         let current = head
         let previous = head
+        let counter = 0
 
-        for (let counter = 0; counter < index && current.next; counter++) {
+        for (; counter < index && current.next; counter++) {
           previous = current
           current = current.next
         }
 
-        previous.next = current.next
+        if (counter === index) {
+          previous.next = current.next
+        }
+
+        return head
+      })
+    }
+
+    const clear = () => setList(null)
+
+    const size = () => {
+      let size = 0
+
+      for (let current = head; !!current; size++) {
+        current = current.next
+      }
+
+      return size
+    }
+
+    const add = (data: T) => addAt(data, size())
+
+    const get = (value: T) => {
+      for (
+        let current = head;
+        current && current.next;
+        current = current.next
+      ) {
+        if (current && current.data === value) {
+          return current
+        }
+
+        current = current.next
+      }
+
+      return null
+    }
+
+    const remove = (value: T) => {
+      setList((list) => {
+        if (!list) {
+          return list
+        }
+
+        if (list.data === value) {
+          return list.next ? list.next : null
+        }
+
+        const head = NodeClass(list.data, list.next)
+        let previous = head
+        let current = head
+
+        if (current && current.data === value) {
+          return head.next
+        }
+
+        while (current.next && current.data !== value) {
+          previous = current
+          current = current.next
+        }
+
+        if (previous && current.data === value) {
+          previous.next = current.next
+        }
 
         return head
       })
@@ -76,9 +145,14 @@ export const useLinkedList = <T>(
     return {
       add,
       addAt,
+      clear,
+      get,
+      prepend,
+      remove,
       removeAt,
+      size,
     }
-  }, [])
+  }, [head])
 
-  return [list, handlers]
+  return [head, handlers]
 }
