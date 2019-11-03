@@ -43,5 +43,12 @@
   },
   "dependencies": {
     "immer": "^5.0.0"
+  },
+  "jest": {
+    "coverageThreshold": {
+      "global": {
+        "lines": 95
+      }
+    }
   }
 }
