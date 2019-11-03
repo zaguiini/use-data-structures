@@ -7,6 +7,7 @@ module.exports = {
     'useQueue',
     'useSet',
     'useStack',
+    'useWeakSet',
     'useWeakMap',
     'Sorting algorithms',
   ],

@@ -1,6 +1,6 @@
 {
   "name": "use-data-structures",
-  "version": "0.6.0",
+  "version": "0.7.1",
   "license": "MIT",
   "author": "Luis Felipe Zaguini",
   "main": "dist/index.js",
@@ -13,8 +13,8 @@
     "start": "tsdx watch",
     "build": "tsdx build",
     "test": "tsdx test",
-    "lint": "tsdx lint './src/**/*.{ts,tsx}' --fix",
-    "prepublish": "yarn build",
+    "test:coverage": "yarn test --coverage && cat ./coverage/lcov.info | coveralls",
+    "lint": "tsdx lint './src/**/*.{ts,tsx}'",
     "docz:dev": "docz dev",
     "docz:build": "docz build",
     "docz:publish": "npx surge .docz/dist use-data-structures.surge.sh"
@@ -31,6 +31,7 @@
     "@testing-library/react-hooks": "^3.1.1",
     "@types/jest": "^24.0.21",
     "@types/react": "^16.9.11",
+    "coveralls": "^3.0.7",
     "docz": "^1.3.2",
     "docz-theme-default": "^1.2.0",
     "husky": "^3.0.9",
