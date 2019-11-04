@@ -13,7 +13,8 @@
     "start": "tsdx watch",
     "build": "tsdx build",
     "test": "tsdx test",
-    "test:coverage": "yarn test --coverage && cat ./coverage/lcov.info | coveralls",
+    "test:coverage": "yarn test --coverage",
+    "test:coverage:send": "yarn test:coverage && cat ./coverage/lcov.info | coveralls",
     "lint": "tsdx lint './src/**/*.{ts,tsx}'",
     "docz:dev": "docz dev",
     "docz:build": "docz build",
@@ -24,7 +25,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn lint"
+      "pre-commit": "yarn lint && yarn test:coverage"
     }
   },
   "devDependencies": {
@@ -43,5 +44,12 @@
   },
   "dependencies": {
     "immer": "^5.0.0"
+  },
+  "jest": {
+    "coverageThreshold": {
+      "global": {
+        "lines": 95
+      }
+    }
   }
 }

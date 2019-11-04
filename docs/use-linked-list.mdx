@@ -1,0 +1,52 @@
+---
+name: useLinkedList
+route: /linked-list
+---
+
+import { Playground, Props } from 'docz'
+import { useLinkedList } from '../src'
+import LinkedListIterator from './components/LinkedListIterator'
+
+# useLinkedList
+
+Just like `useState`, you can pass a default value (e.g. `{ data: 1, next: null }`)
+
+```js
+function App() {
+  const [head, handlers] = useLinkedList()
+
+  return (
+    <>
+      <button onClick={() => handlers.add(handlers.size() + 1)}>
+        Add to linked list
+      </button>
+      <hr />
+      <LinkedListIterator head={head} />
+    </>
+  )
+}
+```
+
+### Example
+
+<Playground>
+  {() => {
+    const [head, handlers] = useLinkedList()
+    const input = React.useRef()
+
+    return (
+      <>
+        <button onClick={() => handlers.add(handlers.size() + 1)}>
+          Add to linked list
+        </button>
+        {' '}
+        <input ref={input} placeholder="Index to remove" />
+        <button onClick={() => handlers.removeAt(+input.current.value)}>Remove</button>
+        <hr />
+        <LinkedListIterator head={head} />
+      </>
+    )
+
+}}
+
+</Playground>
