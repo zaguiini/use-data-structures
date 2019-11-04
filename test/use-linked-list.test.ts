@@ -127,6 +127,23 @@ describe('useLinkedList', () => {
     expect(result.current[1].size()).toBe(0)
   })
 
+  it('should remove the first value', () => {
+    const { result } = renderHook(() => useLinkedList())
+    act(() => result.current[1].add(1))
+    act(() => result.current[1].add(2))
+    act(() => result.current[1].add(3))
+    act(() => result.current[1].removeAt(0))
+
+    expect(result.current[1].size()).toBe(2)
+    expect(result.current[0]).toEqual({
+      data: 2,
+      next: {
+        data: 3,
+        next: null,
+      },
+    })
+  })
+
   it('should remove a value at an specific index', () => {
     const { result } = renderHook(() => useLinkedList())
     act(() => result.current[1].add(1))

@@ -70,6 +70,8 @@ export const useLinkedList = <T>(
       setList((list) => {
         if (!list) {
           return list
+        } else if (index === 0) {
+          return list.next
         }
 
         let head = NodeClass(list.data, list.next)
