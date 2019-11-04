@@ -1,6 +1,6 @@
 {
   "name": "use-data-structures",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "license": "MIT",
   "author": "Luis Felipe Zaguini",
   "main": "dist/index.js",
