@@ -20,81 +20,91 @@ describe('useDeque', () => {
     expect(result.current.isEmpty()).toBeFalsy()
   })
 
-  it('should get a front value', () => {
+  it('should peek a front value', () => {
     const initialValue = [3, 2, 777]
 
     const { result } = renderHook(() => useDeque(initialValue))
 
     let front
     act(() => {
-      front = result.current.getFront()
+      front = result.current.peekFront()
     })
 
     expect(front).toBe(777)
   })
 
-  it('should get a rear value', () => {
+  it('should peek a rear value', () => {
     const initialValue = [55, 2, 10, 7]
 
     const { result } = renderHook(() => useDeque(initialValue))
 
     let rear
     act(() => {
-      rear = result.current.getRear()
+      rear = result.current.peekRear()
     })
 
     expect(rear).toBe(55)
   })
 
-  it('should insert a front value', () => {
+  it('should add a front value', () => {
     const initialValue = [3, 2, 1]
 
     const { result } = renderHook(() => useDeque(initialValue))
 
     act(() => {
-      result.current.insertFront(55)
+      result.current.addFront(55)
     })
 
     expect(result.current.size).toBe(4)
-    expect(result.current.getFront()).toBe(55)
+    expect(result.current.peekFront()).toBe(55)
   })
 
-  it('should insert a rear value', () => {
+  it('should add a rear value', () => {
     const initialValue = [3, 2, 1]
 
     const { result } = renderHook(() => useDeque(initialValue))
 
     act(() => {
-      result.current.insertRear(55)
+      result.current.addRear(55)
     })
 
     expect(result.current.size).toBe(4)
-    expect(result.current.getRear()).toBe(55)
+    expect(result.current.peekRear()).toBe(55)
   })
 
-  it('should delete a front value', () => {
+  it('should remove a front value', () => {
     const initialValue = [3, 2, 55, 7]
 
     const { result } = renderHook(() => useDeque(initialValue))
 
     act(() => {
-      result.current.deleteFront()
+      result.current.removeFront()
     })
 
     expect(result.current.size).toBe(3)
-    expect(result.current.getFront()).toBe(55)
+    expect(result.current.peekFront()).toBe(55)
   })
 
-  it('should delete a rear value', () => {
+  it('should remove a rear value', () => {
     const initialValue = [55, 99, 7]
 
     const { result } = renderHook(() => useDeque(initialValue))
 
     act(() => {
-      result.current.deleteRear()
+      result.current.removeRear()
     })
 
     expect(result.current.size).toBe(2)
-    expect(result.current.getRear()).toBe(99)
+    expect(result.current.peekRear()).toBe(99)
+  })
+
+  it('should clear deque', () => {
+    const { result } = renderHook(() => useDeque([1, 2, 3]))
+
+    act(() => {
+      result.current.clear()
+    })
+
+    expect(result.current.isEmpty()).toBeTruthy()
   })
 })
