@@ -1,14 +1,14 @@
 import { useState, useMemo } from 'react'
 import produce from 'immer'
 
-export const useDeque = <T>(initialState: T[] = []) => {
+export const useDeque = (initialState: number[] = []) => {
   const [value, setValue] = useState(initialState)
 
   const handlers = useMemo(
     () => ({
       deleteFront: () => {
         setValue((oldDeque) =>
-          produce(oldDeque, (draft: T[]) => {
+          produce(oldDeque, (draft: number[]) => {
             draft.pop()
           })
         )
@@ -16,7 +16,7 @@ export const useDeque = <T>(initialState: T[] = []) => {
 
       deleteRear: () => {
         setValue((oldDeque) =>
-          produce(oldDeque, (draft: T[]) => {
+          produce(oldDeque, (draft: number[]) => {
             draft.shift()
           })
         )
@@ -30,17 +30,17 @@ export const useDeque = <T>(initialState: T[] = []) => {
         return value[0]
       },
 
-      insertFront: (item: T) => {
+      insertFront: (item: number) => {
         setValue((oldDeque) =>
-          produce(oldDeque, (draft: T[]) => {
+          produce(oldDeque, (draft: number[]) => {
             draft.push(item)
           })
         )
       },
 
-      insertRear: (item: T) => {
+      insertRear: (item: number) => {
         setValue((oldDeque) =>
-          produce(oldDeque, (draft: T[]) => {
+          produce(oldDeque, (draft: number[]) => {
             draft.unshift(item)
           })
         )
