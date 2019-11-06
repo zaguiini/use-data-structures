@@ -1,3 +1,4 @@
+export * from './use-deque'
 export * from './use-linked-list'
 export * from './use-map'
 export * from './use-queue'

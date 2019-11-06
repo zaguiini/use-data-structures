@@ -3,6 +3,7 @@ module.exports = {
   typescript: true,
   menu: [
     'What is this?',
+    'useDeque',
     'useLinkedList',
     'useMap',
     'useQueue',
