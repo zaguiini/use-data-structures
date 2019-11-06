@@ -20,8 +20,8 @@ before_deploy:
   - git remote remove origin
   - git remote add origin https://${GH_TOKEN}@github.com/zaguiini/use-data-structures.git
   - git fetch && git checkout master
-  - git config user.name "Travis CI"
-  - git config user.email "travis@travis-ci.org"
+  - git config user.name "Luis Felipe Zaguini"
+  - git config user.email "luisfelipezaguini@gmail.com"
 
 deploy:
   provider: script
