@@ -17,7 +17,7 @@
     "test:coverage:send": "yarn test:coverage && cat ./coverage/lcov.info | coveralls",
     "lint": "tsdx lint './src/**/*.{ts,tsx}'",
     "docz:dev": "docz dev",
-    "docz:build": "docz build",
+    "docz:build": "docz build && cp .docz/dist/index.html .docz/dist/200.html",
     "docz:publish": "npx surge .docz/dist use-data-structures.surge.sh"
   },
   "peerDependencies": {
