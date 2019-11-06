@@ -1,0 +1,62 @@
+---
+name: useDeque
+route: /deque
+---
+
+import { Playground } from 'docz'
+import { useDeque } from '../src'
+import { useRef } from 'react'
+
+```js
+import { useDeque } from 'use-data-structures'
+
+function App() {
+  const deque = useDeque()
+  const input = useRef()
+
+  return (
+    <div>
+      <p>Deque size: {deque.size}</p>
+      <div>
+        <input ref={input} placeholder="value" />{' '}
+        <button onClick={() => deque.addFront(input.current.value)}>
+          add front
+        </button>{' '}
+        <button onClick={() => deque.addRear(input.current.value)}>
+          add rear
+        </button>{' '}
+        <button onClick={() => deque.removeFront()}>remove front</button>{' '}
+        <button onClick={() => deque.removeRear()}>remove rear</button>{' '}
+        <button onClick={() => alert(deque.peekFront())}>peek front</button>{' '}
+        <button onClick={() => alert(deque.peekRear())}>peek rear</button>{' '}
+        <button onClick={() => deque.clear()}>clear rear</button>{' '}
+      </div>
+    </div>
+  )
+}
+```
+
+<Playground>
+  {() => {
+    const deque = useDeque()
+    const input = useRef()
+
+    return (
+      <div>
+        <p>Deque size: {deque.size}</p>
+        <div>
+          <input ref={input} placeholder="value" />{" "}
+          <button onClick={() => deque.addFront(input.current.value)}>add front</button>{" "}
+          <button onClick={() => deque.addRear(input.current.value)}>add rear</button>{" "}
+          <button onClick={() => deque.removeFront()}>remove front</button>{" "}
+          <button onClick={() => deque.removeRear()}>remove rear</button>{" "}
+          <button onClick={() => alert(deque.peekFront())}>peek front</button>{" "}
+          <button onClick={() => alert(deque.peekRear())}>peek rear</button>{" "}
+          <button onClick={() => deque.clear()}>clear rear</button>{" "}
+        </div>
+      </div>
+    )
+
+}}
+
+</Playground>
