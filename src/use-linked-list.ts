@@ -5,7 +5,7 @@ export interface Node<T> {
   next: Node<T> | null
 }
 
-const NodeClass = <T>(data: T, next: Node<T> | null = null) => ({
+export const Node = <T>(data: T, next: Node<T> | null = null) => ({
   data,
   next,
 })
@@ -22,126 +22,152 @@ interface Handlers<T> {
   size: () => number
 }
 
+export const linkedListHandlers = {
+  addAt: <T>(index: number, data: T, head: Node<T> | null) => {
+    if (index === 0) {
+      return Node(data, head)
+    }
+
+    let previous = linkedListHandlers.getAt(index - 1, head)
+
+    if (previous) {
+      previous.next = Node(data, previous.next)
+    }
+
+    return head
+  },
+
+  get: <T>(match: (currentNodeData: T) => boolean, head: Node<T> | null) => {
+    let current = head
+
+    while (current) {
+      if (match(current.data)) {
+        return current
+      }
+
+      current = current.next
+    }
+
+    return null
+  },
+
+  getAt: <T>(index: number, head: Node<T> | null) => {
+    let counter = 0
+    let current = head
+
+    while (current) {
+      if (counter === index) {
+        return current
+      }
+
+      counter++
+      current = current.next
+    }
+
+    return null
+  },
+
+  prepend: <T>(data: T, head: Node<T> | null) =>
+    linkedListHandlers.addAt(0, data, head),
+
+  remove: <T>(value: T, list: Node<T> | null) => {
+    if (!list) {
+      return list
+    }
+
+    if (list.data === value) {
+      return list.next ? list.next : null
+    }
+
+    const head = Node(list.data, list.next)
+    let previous = head
+    let current = head
+
+    while (current.next && current.data !== value) {
+      previous = current
+      current = current.next
+    }
+
+    if (previous && current.data === value) {
+      previous.next = current.next
+    }
+
+    return head
+  },
+
+  removeAt: <T>(index: number, list: Node<T> | null) => {
+    if (!list) {
+      return list
+    } else if (index === 0) {
+      return list.next
+    }
+
+    let head = Node(list.data, list.next)
+
+    const previous = linkedListHandlers.getAt(index - 1, head)
+
+    if (previous) {
+      previous.next = previous.next ? previous.next.next : null
+    }
+
+    return head
+  },
+
+  size: <T>(head: Node<T> | null) => {
+    let size = 0
+    let current = head
+
+    while (current) {
+      current = current.next
+      size++
+    }
+
+    return size
+  },
+}
+
 export const useLinkedList = <T>(
   initialHead?: Node<T>
 ): [Node<T> | null, Handlers<T>] => {
   const [head, setList] = React.useState(initialHead || null)
 
   const handlers = React.useMemo(() => {
-    const getAt = (index: number, headEl = head) => {
-      let counter = 0
-      let current = headEl
-
-      while (current) {
-        if (counter === index) {
-          return current
-        }
-
-        counter++
-        current = current.next
-      }
-
-      return null
-    }
-
     const addAt = (data: T, index: number) => {
       setList((list) => {
-        let head = NodeClass(data)
-
-        if (index === 0) {
-          return NodeClass(data, list)
-        } else if (list) {
-          head = NodeClass(list.data, list.next)
-        }
-
-        let previous = getAt(index - 1, head)
-
-        if (previous) {
-          previous.next = NodeClass(data, previous.next)
-        }
-
-        return head
+        return linkedListHandlers.addAt(
+          index,
+          data,
+          list ? Object.assign({}, list) : null
+        )
       })
     }
 
-    const prepend = (data: T) => addAt(data, 0)
+    const prepend = (data: T) => {
+      setList((list) => {
+        return linkedListHandlers.prepend(
+          data,
+          list ? Object.assign({}, list) : null
+        )
+      })
+    }
 
     const removeAt = (index: number) => {
-      setList((list) => {
-        if (!list) {
-          return list
-        } else if (index === 0) {
-          return list.next
-        }
-
-        let head = NodeClass(list.data, list.next)
-
-        const previous = getAt(index - 1, head)
-
-        if (previous) {
-          previous.next = previous.next ? previous.next.next : null
-        }
-
-        return head
-      })
+      setList((list) => linkedListHandlers.removeAt(index, list))
     }
 
     const clear = () => setList(null)
 
-    const size = () => {
-      let size = 0
-      let current = head
+    const size = () => linkedListHandlers.size(head)
 
-      while (current) {
-        current = current.next
-        size++
-      }
+    const add = (data: T) => linkedListHandlers.addAt(size(), data, head)
 
-      return size
-    }
+    const get = (value: T) =>
+      linkedListHandlers.get((data) => data === value, head)
 
-    const add = (data: T) => addAt(data, size())
+    const getAt = (index: number) => linkedListHandlers.getAt(index, head)
 
-    const get = (value: T) => {
-      let current = head
-
-      while (current) {
-        if (current.data === value) {
-          return current
-        }
-
-        current = current.next
-      }
-
-      return null
-    }
-
-    const remove = (value: T) => {
-      setList((list) => {
-        if (!list) {
-          return list
-        }
-
-        if (list.data === value) {
-          return list.next ? list.next : null
-        }
-
-        const head = NodeClass(list.data, list.next)
-        let previous = head
-        let current = head
-
-        while (current.next && current.data !== value) {
-          previous = current
-          current = current.next
-        }
-
-        if (previous && current.data === value) {
-          previous.next = current.next
-        }
-
-        return head
-      })
-    }
+    const remove = (value: T) =>
+      setList((list) => linkedListHandlers.remove(value, list))
 
     return {
       add,
