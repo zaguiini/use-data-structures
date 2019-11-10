@@ -19,19 +19,17 @@ function App() {
   const hashFunction = useRef((key) =>
     key.split('').reduce((curr, next) => curr + next.charCodeAt(0), 0)
   )
-  // this hash function is dumb as f,
+  // this hash function is really dumb,
   // i'm only using it to show how we handle the collisions
 
   const [key, setKey] = useState('')
   const [value, setValue] = useState('')
 
-  const hashTable = useHashTable(
-    {},
-    {
-      hashFunction: hashFunction.current, // (key: any, bucketSize: number) => number
-      bucketSize: 30, // number
-    }
-  )
+  const hashTable = useHashTable(undefined, {
+    // first argument is optional
+    hashFunction: hashFunction.current, // (key: any, bucketSize: number) => number
+    bucketSize: 30, // number
+  })
 
   return (
     <div>

@@ -6,10 +6,6 @@ import { Node, linkedListHandlers } from './use-linked-list'
 const defaultHashFunction = (key: string, bucketSize: number) => {
   let hash = 0
 
-  if (!key.length) {
-    return hash
-  }
-
   for (let i = 0; i < key.length; i++) {
     hash = (hash << 5) - hash + key.charCodeAt(i)
     hash = hash & hash
@@ -26,7 +22,7 @@ interface HashTableOptions {
 }
 
 export const useHashTable = <TKey extends any, TValue>(
-  initialHashTable: HashTableValues<TKey, TValue> = [],
+  initialHashTable?: HashTableValues<TKey, TValue>,
   { hashFunction = defaultHashFunction, bucketSize = 42 }: HashTableOptions = {}
 ) => {
   const [table, setValue] = React.useState(() => {

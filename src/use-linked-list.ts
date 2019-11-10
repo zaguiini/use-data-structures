@@ -159,7 +159,7 @@ export const useLinkedList = <T>(
 
     const size = () => linkedListHandlers.size(head)
 
-    const add = (data: T) => linkedListHandlers.addAt(size(), data, head)
+    const add = (data: T) => addAt(data, size())
 
     const get = (value: T) =>
       linkedListHandlers.get((data) => data === value, head)
