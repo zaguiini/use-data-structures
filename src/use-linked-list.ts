@@ -70,12 +70,12 @@ export const linkedListHandlers = {
   prepend: <T>(data: T, head: Node<T> | null) =>
     linkedListHandlers.addAt(0, data, head),
 
-  remove: <T>(value: T, list: Node<T> | null) => {
+  remove: <T>(match: (currentNodeData: T) => boolean, list: Node<T> | null) => {
     if (!list) {
       return list
     }
 
-    if (list.data === value) {
+    if (match(list.data)) {
       return list.next ? list.next : null
     }
 
@@ -83,12 +83,12 @@ export const linkedListHandlers = {
     let previous = head
     let current = head
 
-    while (current.next && current.data !== value) {
+    while (current.next && !match(current.data)) {
       previous = current
       current = current.next
     }
 
-    if (previous && current.data === value) {
+    if (previous && match(current.data)) {
       previous.next = current.next
     }
 
@@ -167,7 +167,9 @@ export const useLinkedList = <T>(
     const getAt = (index: number) => linkedListHandlers.getAt(index, head)
 
     const remove = (value: T) =>
-      setList((list) => linkedListHandlers.remove(value, list))
+      setList((list) =>
+        linkedListHandlers.remove((data) => data === value, list)
+      )
 
     return {
       add,

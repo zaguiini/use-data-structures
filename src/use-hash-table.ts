@@ -1,6 +1,7 @@
-import { Node, linkedListHandlers } from './use-linked-list'
 import React from 'react'
 import produce from 'immer'
+
+import { Node, linkedListHandlers } from './use-linked-list'
 
 const defaultHashFunction = <TKey extends string>(key: TKey) => {
   let hash = 0
@@ -17,30 +18,58 @@ const defaultHashFunction = <TKey extends string>(key: TKey) => {
   return Math.abs(hash)
 }
 
+type HashTableValues<TKey, TValue> = { [key: number]: Node<[TKey, TValue]> }
+
 export const useHashTable = <TKey extends string, TValue>(
-  initialHashMap: Node<[TKey, TValue]>[] = [],
-  hashFunction = defaultHashFunction
+  initialHashMap: HashTableValues<TKey, TValue> = {},
+  hashFunction: (key: any) => number = defaultHashFunction
 ) => {
   const [table, setValue] = React.useState(initialHashMap)
 
   const handlers = React.useMemo(
     () => ({
+      clear: () => setValue([]),
+
+      delete: (key: TKey) => {
+        setValue((table) =>
+          produce(table, (draft: Node<[TKey, TValue]>[]) => {
+            const index = hashFunction(key)
+            const match = draft[index]
+
+            if (match) {
+              draft[index] = linkedListHandlers.remove<[TKey, TValue]>(
+                ([currentKey]) => currentKey === key,
+                match
+              ) as Node<[TKey, TValue]>
+            }
+          })
+        )
+      },
+
       get: (key: TKey) => {
         const index = hashFunction(key)
         const match = table[index]
 
         if (match) {
-          const found = linkedListHandlers.get<[TKey, TValue]>(
+          let found = linkedListHandlers.get<[TKey, TValue]>(
             ([currentKey]) => currentKey === key,
             match
           )
 
-          if (found) {
-            return found.data[1]
+          while (found) {
+            if (found.data[0] === key) {
+              return found.data[1]
+            }
           }
         }
 
         return null
+      },
+
+      has: (key: TKey) => {
+        const index = hashFunction(key)
+
+        return !!table[index]
       },
 
       set: (key: TKey, value: TValue) =>
