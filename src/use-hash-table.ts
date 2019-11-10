@@ -3,7 +3,7 @@ import produce from 'immer'
 
 import { Node, linkedListHandlers } from './use-linked-list'
 
-const defaultHashFunction = <TKey extends string>(key: TKey) => {
+const defaultHashFunction = (key: string, bucketSize: number) => {
   let hash = 0
 
   if (!key.length) {
@@ -15,25 +15,36 @@ const defaultHashFunction = <TKey extends string>(key: TKey) => {
     hash = hash & hash
   }
 
-  return Math.abs(hash)
+  return Math.abs(hash) % bucketSize
 }
 
-type HashTableValues<TKey, TValue> = { [key: number]: Node<[TKey, TValue]> }
+type HashTableValues<TKey, TValue> = Node<[TKey, TValue]>[]
 
-export const useHashTable = <TKey extends string, TValue>(
-  initialHashMap: HashTableValues<TKey, TValue> = {},
-  hashFunction: (key: any) => number = defaultHashFunction
+interface HashTableOptions {
+  hashFunction?: (key: any, bucketSize: number) => number
+  bucketSize?: number
+}
+
+export const useHashTable = <TKey extends any, TValue>(
+  initialHashTable: HashTableValues<TKey, TValue> = [],
+  { hashFunction = defaultHashFunction, bucketSize = 42 }: HashTableOptions = {}
 ) => {
-  const [table, setValue] = React.useState(initialHashMap)
+  const [table, setValue] = React.useState(() => {
+    if (initialHashTable) {
+      return initialHashTable
+    }
+
+    return new Array(bucketSize)
+  })
 
   const handlers = React.useMemo(
     () => ({
-      clear: () => setValue([]),
+      clear: () => setValue(new Array(bucketSize)),
 
       delete: (key: TKey) => {
         setValue((table) =>
           produce(table, (draft: Node<[TKey, TValue]>[]) => {
-            const index = hashFunction(key)
+            const index = hashFunction(key, bucketSize)
             const match = draft[index]
 
             if (match) {
@@ -47,7 +58,7 @@ export const useHashTable = <TKey extends string, TValue>(
       },
 
       get: (key: TKey) => {
-        const index = hashFunction(key)
+        const index = hashFunction(key, bucketSize)
         const match = table[index]
 
         if (match) {
@@ -67,7 +78,7 @@ export const useHashTable = <TKey extends string, TValue>(
       },
 
       has: (key: TKey) => {
-        const index = hashFunction(key)
+        const index = hashFunction(key, bucketSize)
 
         return !!table[index]
       },
@@ -75,7 +86,7 @@ export const useHashTable = <TKey extends string, TValue>(
       set: (key: TKey, value: TValue) =>
         setValue((table) =>
           produce(table, (draft: Node<[TKey, TValue]>[]) => {
-            const index = hashFunction(key)
+            const index = hashFunction(key, bucketSize)
 
             if (draft[index]) {
               const size = linkedListHandlers.size(draft[index])
@@ -90,7 +101,7 @@ export const useHashTable = <TKey extends string, TValue>(
           })
         ),
     }),
-    [hashFunction, table]
+    [bucketSize, hashFunction, table]
   )
 
   return handlers

@@ -12,19 +12,74 @@ import { useState, useRef } from 'react'
 Just like `useState`, you can pass a default value handling the collisions with linked lists, but be sure to use the same hashing algorithm to compute the keys.
 Also, the values are stored using linked lists with the following signature:<br />`{ data: 1, next: null }`
 
-You can pass your custom hashing algorithm as the second argument for the hook. Signature:<br />
-`(key: any) => number`
+The second argument is an options object.
+
+```js
+function App() {
+  const hashFunction = useRef((key) =>
+    key.split('').reduce((curr, next) => curr + next.charCodeAt(0), 0)
+  )
+  // this hash function is dumb as f,
+  // i'm only using it to show how we handle the collisions
+
+  const [key, setKey] = useState('')
+  const [value, setValue] = useState('')
+
+  const hashTable = useHashTable(
+    {},
+    {
+      hashFunction: hashFunction.current, // (key: any, bucketSize: number) => number
+      bucketSize: 30, // number
+    }
+  )
+
+  return (
+    <div>
+      <p>
+        Value for "{key}": {hashTable.get(key) || 'Not found'}
+      </p>
+      <div>
+        <div>
+          <p>
+            Key:{' '}
+            <input
+              onChange={({ target }) => setKey(target.value)}
+              value={key}
+            />
+          </p>
+          <p>
+            Value:{' '}
+            <input
+              onChange={({ target }) => setValue(target.value)}
+              value={value}
+            />
+          </p>
+        </div>
+        <button onClick={() => hashTable.set(key, value)}>Add value</button>
+        <button onClick={hashTable.clear}>Clear all values</button>
+        <button onClick={() => hashTable.delete(key)}>Delete value</button>
+        <button onClick={() => alert(hashTable.has(key))}>Has value?</button>
+      </div>
+    </div>
+  )
+}
+```
+
+### Example
 
 <Playground>
   {() => {
-    const hashingAlgorithm = useRef((key) => key.split('').reduce((curr, next) => curr + next.charCodeAt(0), 0))
+    const hashFunction = useRef((key) => key.split('').reduce((curr, next) => curr + next.charCodeAt(0), 0))
     // this hashing algorithm is dumb as f,
     // i'm only using it to show how we handle the collisions
 
     const [key, setKey] = useState('')
     const [value, setValue] = useState('')
 
-    const hashTable = useHashTable({}, hashingAlgorithm.current)
+    const hashTable = useHashTable({}, {
+      hashFunction: hashFunction.current,
+      bucketSize: 30,
+    })
 
     return (
       <div>
