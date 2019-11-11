@@ -1,7 +1,7 @@
 import React from 'react'
 import produce from 'immer'
 
-import { Node, linkedListHandlers } from './use-linked-list'
+import { NodeType, linkedListHandlers, LinkedListNode } from './use-linked-list'
 
 const defaultHashFunction = (key: string, bucketSize: number) => {
   let hash = 0
@@ -14,7 +14,7 @@ const defaultHashFunction = (key: string, bucketSize: number) => {
   return Math.abs(hash) % bucketSize
 }
 
-type HashTableValues<TKey, TValue> = Node<[TKey, TValue]>[]
+type HashTableValues<TKey, TValue> = (NodeType<[TKey, TValue]> | null)[]
 
 interface HashTableOptions {
   hashFunction?: (key: any, bucketSize: number) => number
@@ -30,7 +30,7 @@ export const useHashTable = <TKey extends any, TValue>(
       return initialHashTable
     }
 
-    return new Array(bucketSize)
+    return new Array(bucketSize) as HashTableValues<TKey, TValue>
   })
 
   const handlers = React.useMemo(
@@ -39,7 +39,7 @@ export const useHashTable = <TKey extends any, TValue>(
 
       delete: (key: TKey) => {
         setValue((table) =>
-          produce(table, (draft: Node<[TKey, TValue]>[]) => {
+          produce(table, (draft: HashTableValues<TKey, TValue>) => {
             const index = hashFunction(key, bucketSize)
             const match = draft[index]
 
@@ -47,7 +47,7 @@ export const useHashTable = <TKey extends any, TValue>(
               draft[index] = linkedListHandlers.remove<[TKey, TValue]>(
                 ([currentKey]) => currentKey === key,
                 match
-              ) as Node<[TKey, TValue]>
+              )
             }
           })
         )
@@ -79,20 +79,27 @@ export const useHashTable = <TKey extends any, TValue>(
         return !!table[index]
       },
 
+      size: () => {
+        return table.reduce((curr, next) => {
+          return curr + linkedListHandlers.size(next)
+        }, 0)
+      },
+
       set: (key: TKey, value: TValue) =>
         setValue((table) =>
-          produce(table, (draft: Node<[TKey, TValue]>[]) => {
+          produce(table, (draft: HashTableValues<TKey, TValue>) => {
             const index = hashFunction(key, bucketSize)
 
             if (draft[index]) {
               const size = linkedListHandlers.size(draft[index])
+
               draft[index] = linkedListHandlers.addAt(
                 size,
                 [key, value],
                 draft[index]
-              ) as Node<[TKey, TValue]>
+              )
             } else {
-              draft[index] = Node([key, value])
+              draft[index] = LinkedListNode([key, value])
             }
           })
         ),

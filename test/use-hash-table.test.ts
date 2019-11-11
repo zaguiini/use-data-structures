@@ -53,6 +53,10 @@ describe('useHashTable', () => {
       result.current.delete('123')
     })
 
+    act(() => {
+      result.current.delete('4t6')
+    })
+
     expect(result.current.get('123')).toBe(null)
   })
 
@@ -68,5 +72,19 @@ describe('useHashTable', () => {
     })
 
     expect(result.current.get('123')).toBe(null)
+  })
+
+  it('should return the correct size', () => {
+    const { result } = renderHook(() => useHashTable())
+
+    act(() => {
+      result.current.set('123', '456')
+    })
+
+    act(() => {
+      result.current.set('456', '123')
+    })
+
+    expect(result.current.size()).toBe(2)
   })
 })

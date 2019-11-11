@@ -1,11 +1,14 @@
 import React from 'react'
 
-export interface Node<T> {
+export interface NodeType<T> {
   data: T
-  next: Node<T> | null
+  next: NodeType<T> | null
 }
 
-export const Node = <T>(data: T, next: Node<T> | null = null) => ({
+export const LinkedListNode = <T>(
+  data: T,
+  next: NodeType<T> | null = null
+) => ({
   data,
   next,
 })
@@ -14,7 +17,7 @@ interface Handlers<T> {
   add: (data: T) => void
   addAt: (data: T, index: number) => void
   clear: () => void
-  get: (value: T) => Node<T> | null
+  get: (value: T) => NodeType<T> | null
   getAt: (index: number) => void
   prepend: (data: T) => void
   remove: (value: T) => void
@@ -23,21 +26,24 @@ interface Handlers<T> {
 }
 
 export const linkedListHandlers = {
-  addAt: <T>(index: number, data: T, head: Node<T> | null) => {
+  addAt: <T>(index: number, data: T, head: NodeType<T> | null) => {
     if (index === 0) {
-      return Node(data, head)
+      return LinkedListNode(data, head)
     }
 
     let previous = linkedListHandlers.getAt(index - 1, head)
 
     if (previous) {
-      previous.next = Node(data, previous.next)
+      previous.next = LinkedListNode(data, previous.next)
     }
 
     return head
   },
 
-  get: <T>(match: (currentNodeData: T) => boolean, head: Node<T> | null) => {
+  get: <T>(
+    match: (currentNodeData: T) => boolean,
+    head: NodeType<T> | null
+  ) => {
     let current = head
 
     while (current) {
@@ -51,7 +57,7 @@ export const linkedListHandlers = {
     return null
   },
 
-  getAt: <T>(index: number, head: Node<T> | null) => {
+  getAt: <T>(index: number, head: NodeType<T> | null) => {
     let counter = 0
     let current = head
 
@@ -67,10 +73,13 @@ export const linkedListHandlers = {
     return null
   },
 
-  prepend: <T>(data: T, head: Node<T> | null) =>
+  prepend: <T>(data: T, head: NodeType<T> | null) =>
     linkedListHandlers.addAt(0, data, head),
 
-  remove: <T>(match: (currentNodeData: T) => boolean, list: Node<T> | null) => {
+  remove: <T>(
+    match: (currentNodeData: T) => boolean,
+    list: NodeType<T> | null
+  ) => {
     if (!list) {
       return list
     }
@@ -79,7 +88,7 @@ export const linkedListHandlers = {
       return list.next ? list.next : null
     }
 
-    const head = Node(list.data, list.next)
+    const head = LinkedListNode(list.data, list.next)
     let previous = head
     let current = head
 
@@ -95,14 +104,14 @@ export const linkedListHandlers = {
     return head
   },
 
-  removeAt: <T>(index: number, list: Node<T> | null) => {
+  removeAt: <T>(index: number, list: NodeType<T> | null) => {
     if (!list) {
       return list
     } else if (index === 0) {
       return list.next
     }
 
-    let head = Node(list.data, list.next)
+    let head = LinkedListNode(list.data, list.next)
 
     const previous = linkedListHandlers.getAt(index - 1, head)
 
@@ -113,7 +122,7 @@ export const linkedListHandlers = {
     return head
   },
 
-  size: <T>(head: Node<T> | null) => {
+  size: <T>(head: NodeType<T> | null) => {
     let size = 0
     let current = head
 
@@ -127,8 +136,8 @@ export const linkedListHandlers = {
 }
 
 export const useLinkedList = <T>(
-  initialHead?: Node<T>
-): [Node<T> | null, Handlers<T>] => {
+  initialHead?: NodeType<T>
+): [NodeType<T> | null, Handlers<T>] => {
   const [head, setList] = React.useState(initialHead || null)
 
   const handlers = React.useMemo(() => {
