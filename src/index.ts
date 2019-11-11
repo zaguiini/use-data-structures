@@ -8,4 +8,5 @@ export * from './use-weak-map'
 export * from './use-weak-set'
 
 export * from './use-bubble-sort'
+export * from './use-insertion-sort'
 export * from './use-selection-sort'
