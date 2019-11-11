@@ -74,7 +74,7 @@ function App() {
     const [key, setKey] = useState('')
     const [value, setValue] = useState('')
 
-    const hashTable = useHashTable({}, {
+    const hashTable = useHashTable(undefined, {
       hashFunction: hashFunction.current,
       bucketSize: 30,
     })
