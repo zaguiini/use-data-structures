@@ -4,13 +4,14 @@ module.exports = {
   menu: [
     'What is this?',
     'useDeque',
+    'useHashTable',
     'useLinkedList',
     'useMap',
     'useQueue',
     'useSet',
     'useStack',
-    'useWeakSet',
     'useWeakMap',
+    'useWeakSet',
     'Sorting algorithms',
   ],
   themeConfig: {
