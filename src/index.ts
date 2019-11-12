@@ -1,3 +1,4 @@
+export * from './use-binary-tree'
 export * from './use-deque'
 export * from './use-hash-table'
 export * from './use-linked-list'
