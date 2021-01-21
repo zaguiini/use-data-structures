@@ -43,7 +43,7 @@
     "typescript": "^3.6.4"
   },
   "dependencies": {
-    "immer": "^5.0.0"
+    "immer": "^8.0.1"
   },
   "jest": {
     "coverageThreshold": {
